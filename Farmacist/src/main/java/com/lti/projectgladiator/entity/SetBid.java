@@ -1,80 +1,73 @@
 package com.lti.projectgladiator.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="FS_FARMER_REQ")
 public class SetBid {
-	
+
 	@Id
 	@GeneratedValue
-	@Column(name="set_bid_id")
-	private int setBidId;
-	@Column(name="crop_type")
-	private String cropType;
-	@Column(name="crop_name")
-	private String cropName;
-	@Column(name="fertilizer_type")
-	private String fertilizerType;
-	@Column(name="quantity")
-	private int quantity;
+	@Column(name="REQ_ID")
+	private int id;
+	@Column(name="CROP_NAME")
+	private String cropname;
+	@Column(name="CROP_TYPE")
+	private String croptype;
+    @Column(name="CROP_VARIETY")
+	private String cropvariety;
+    @Column(name="CROP_QUANTITY")
+	private int cropquantity;
 	
-	//relationships
 	@ManyToOne
 	@JoinColumn(name="f_id")
-	private FarmerInfo farmerInfo;
-	
-	
-	public int getSetBidId() {
-		return setBidId;
-	}
-
-	public void setSetBidId(int setBidId) {
-		this.setBidId = setBidId;
-	}
-
-	public String getCropType() {
-		return cropType;
-	}
-
-	public void setCropType(String cropType) {
-		this.cropType = cropType;
-	}
-
-	public String getCropName() {
-		return cropName;
-	}
-
-	public void setCropName(String cropName) {
-		this.cropName = cropName;
-	}
-
-	public String getFertilizerType() {
-		return fertilizerType;
-	}
-
-	public void setFertilizerType(String fertilizerType) {
-		this.fertilizerType = fertilizerType;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public FarmerInfo getFarmerInfo() {
-		return farmerInfo;
-	}
-
-	public void setFarmerInfo(FarmerInfo farmerInfo) {
-		this.farmerInfo = farmerInfo;
-	}
-
+	private FarmerInfo farmer;
 	
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getCropname() {
+		return cropname;
+	}
+
+	public void setCropname(String cropname) {
+		this.cropname = cropname;
+	}
+
+	public String getCropvariety() {
+		return cropvariety;
+	}
+
+	public void setCropvariety(String cropvariety) {
+		this.cropvariety = cropvariety;
+	}
+
+	public int getCropquantity() {
+		return cropquantity;
+	}
+
+	public void setCropquantity(int cropquantity) {
+		this.cropquantity = cropquantity;
+	}
+
+	public FarmerInfo getFarmer() {
+		return farmer;
+	}
+
+	public void setFarmer(FarmerInfo farmer) {
+		this.farmer = farmer;
+	}
+	
 }

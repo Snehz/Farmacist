@@ -3,16 +3,26 @@ package com.lti.projectgladiator.service;
 import java.io.File;
 import java.io.IOException;
 
+
+
+
+
+import java.io.File;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.lti.projectgladiator.dao.BidderInfoDAO;
 import com.lti.projectgladiator.dto.BidderInfoDTO;
+import com.lti.projectgladiator.dto.BidderRequestDTO;
 import com.lti.projectgladiator.dto.BidderStatusDTO;
 import com.lti.projectgladiator.entity.BidderInfo;
+import com.lti.projectgladiator.entity.BidderRequest;
+import com.lti.projectgladiator.entity.SetBid;
 
 
-@Component("bidderService")
+@Service
 public class RegisterService {
 	
 	@Autowired
@@ -20,11 +30,13 @@ public class RegisterService {
 
 	public BidderStatusDTO addBidder(BidderInfoDTO bidderDTO) {
 		
+		System.out.println("Service");
 		/*
 		 * String path = "d:/AadharCard/"; String filename=bidderDTO.getUsername()
 		 * +"-"+bidderDTO.getBtnaadhar().getOriginalFilename(); String finalpath = path
 		 * +filename; try { bidderDTO.getBtnaadhar().transferTo(new File(finalpath)); }
 		 * catch (IOException e) { e.printStackTrace(); }
+		 * 
 		 * 
 		 * String path1 = "d:/PanCard/"; String filename1=bidderDTO.getUsername()
 		 * +"-"+bidderDTO.getBtnpan().getOriginalFilename(); String finalpath1 = path1
@@ -36,6 +48,8 @@ public class RegisterService {
 		 * +filename2; try { bidderDTO.getBtntrade().transferTo(new File(finalpath2)); }
 		 * catch (IOException e) { e.printStackTrace(); }
 		 */
+		 
+		 
 		
 		BidderInfo bidder=new BidderInfo();
 		bidder.setBname(bidderDTO.getUsername());
@@ -48,10 +62,12 @@ public class RegisterService {
 		bidder.setBaccno(bidderDTO.getAccountno());
 		bidder.setBifsc(bidderDTO.getIfsccode());
 		bidder.setBpassword(bidderDTO.getPassword());
-		/*
-		 * bidder.setBaadhaar(filename); bidder.setBpan(filename1);
-		 * bidder.setBtraderlicense(filename2);
-		 */
+		
+		bidder.setBaadhaar(bidderDTO.getBtnaadhar());
+		bidder.setBpan(bidderDTO.getBtnpan());
+		bidder.setBtraderlicense(bidderDTO.getBtntrade());
+		 
+		 
 		
        int id= dao.addBidder(bidder);
        
@@ -59,5 +75,15 @@ public class RegisterService {
 		status.setId(id);
 		status.setMessage("Registered Successfully");
 		return status;		
+	}
+	
+	public SetBid fetch(BidderRequestDTO dto) {
+		
+		System.out.println("service");
+		//int id=dto.getBidderid();
+		int idd=dto.getCropId();
+		SetBid dd=dao.display(idd);
+		return dd;
+		
 	}
 }

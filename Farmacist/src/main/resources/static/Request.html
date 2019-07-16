@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+$(function(){
+
+	$("#requestbidder").submit(function(evt){
+		evt.preventDefault();
+		var obj={
+		 cropId: 98,
+		 bidderId: 321
+		}
+			/* 	 file_data = $('#btnaadhar').prop('files')[0];   
+                 form_data = new FormData();                  
+                form_data.append('btnaadhar', file_data); */
+		
+		$.ajax({
+			
+			url:'/Request',
+			method:'POST',
+			data:JSON.stringify(obj),
+			contentType:'application/json',
+			success: function(response){
+				//alert(JSON.stringify(response));	//Stringify: toString()
+				var p1 = $("<h3/>").text("CropID: "+response.id);
+				var p2 = $("<h3/>").text("CropName: "+response.cropname);
+				var p3 = $("<h3/>").text("CropType: "+response.croptype);
+				var p4 = $("<h3/>").text("CropVariety: "+response.cropvariety);
+				var p5 = $("<h3/>").text("CropQuantity: "+response.cropquantity);
+				$("#details").html("<h1>Details of Crop: "+"</h1>")
+								.append(p1)
+								.append(p2)
+								.append(p3)
+								.append(p4)
+								.append(p5);
+				
+			}
+		})
+		
+	})
+})
+</script>
+</head>
+
+<body>
+<form id="requestbidder">
+<button id="farmer" type="submit">Crop 1</button>
+</form>
+
+
+
+<form>
+<div>
+Enter the Amount For Bid: <input type="number"/><br/>
+<input type="submit" />
+</div>
+</form>
+
+<div id="details">
+</div>
+
+</body>
+</html>
